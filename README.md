@@ -1,11 +1,8 @@
-# Fragmented Reality Breaker – Unity Prototype
-
-CMP-6056B / CMP-7042B  
-Video Game Design Plan 001
+# CMP-7042B-GamePlan-002 – Fragmented Reality Breaker
 
 ## Overview
 Fragmented Reality Breaker is a 3D third-person prototype developed in Unity.  
-The player explores a small level and collects energy nodes to stabilise a simulated environment.
+The player explores levels and collects energy nodes to stabilise a simulated environment.
 
 ## Core Mechanics
 - Third-person movement and camera
@@ -13,6 +10,8 @@ The player explores a small level and collects energy nodes to stabilise a simul
 - Energy node collection system
 - UI counter tracking progress
 - Win condition triggered when all nodes are collected
+- Respawn system (fall off platform → reset to spawn with damage)
+- Two levels with transitions and a polished win sequence
 
 ## Controls
 WASD – Movement  
@@ -30,6 +29,3 @@ Space – Jump
 Assets – Game scripts, scenes, prefabs and materials  
 Packages – Unity package dependencies  
 ProjectSettings – Unity project configuration
-
-## Video Demo
-Link will be included in the report submission.
