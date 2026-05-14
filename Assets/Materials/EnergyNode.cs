@@ -14,7 +14,14 @@ public class EnergyNode : MonoBehaviour
         {
             collected = true;
             gameManager.CollectNode();
-            gameObject.SetActive(false);
+
+            // Play the scale-pulse animation then self-destruct.
+            // Falls back to immediate deactivation if no animator is present.
+            var animator = GetComponent<EnergyNodeAnimator>();
+            if (animator != null)
+                animator.Collect();
+            else
+                gameObject.SetActive(false);
         }
     }
 }

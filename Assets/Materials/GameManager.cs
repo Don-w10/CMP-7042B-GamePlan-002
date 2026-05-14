@@ -3,39 +3,54 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("UI")]
-    public TextMeshProUGUI counterText;
-    public GameObject winText;
+    // Read by Level2Manager and GameOverManager
+    public static int CurrentLevel       = 1;
+    public static int LastNodesCollected { get; private set; }
 
-    [Header("Game")]
+    [Header("Level Config")]
+    [SerializeField] protected int levelNumber = 1;
     public int totalNodes = 6;
+
+    [Header("UI")]
+    public TMP_Text winText;
+    public TMP_Text levelText;
+
+    [Header("Player")]
+    public PlayerHealth playerHealth;
 
     private int collected = 0;
 
-    private void Start()
+    protected virtual void Start()
     {
-        UpdateUI();
-        if (winText != null)
-            winText.SetActive(false);
+        CurrentLevel = levelNumber;
+        collected    = 0;
+
+        if (winText  != null) winText.gameObject.SetActive(false);
+        if (levelText != null) levelText.text = "Level: " + CurrentLevel;
+
+        HUDManager.Instance?.SetNodes(0, totalNodes);
     }
 
     public void CollectNode()
     {
         collected++;
-        UpdateUI();
+        LastNodesCollected = collected;
+        HUDManager.Instance?.SetNodes(collected, totalNodes);
 
-        if (collected >= totalNodes)
-        {
-            if (winText != null)
-                winText.SetActive(true);
-
-            Time.timeScale = 0f;
-        }
+        if (collected < totalNodes) return;
+        OnAllNodesCollected();
     }
 
-    private void UpdateUI()
+    // Level1 behaviour: show brief message then hand off to LevelTransition.
+    // Level2Manager overrides this to show the win screen and freeze time.
+    protected virtual void OnAllNodesCollected()
     {
-        if (counterText != null)
-            counterText.text = "Nodes: " + collected + "/" + totalNodes;
+        if (winText != null)
+        {
+            winText.gameObject.SetActive(true);
+            winText.text = "LEVEL COMPLETE!\nEntering the Core...";
+        }
+
+        LevelTransition.Instance?.StartTransition();
     }
 }
