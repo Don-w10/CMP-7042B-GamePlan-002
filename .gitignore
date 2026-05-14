@@ -69,3 +69,16 @@ InitTestScene*.unity*
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
 
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# IDE / tool files
+.claude/
+.mcp.json
+*.json
+
+# Unity MCP plugin (dev tool, not game asset)
+/[Aa]ssets/Plugins/
+/[Aa]ssets/Plugins.meta
+
+# Unity auto-recovery scenes
+/[Aa]ssets/_Recovery/
+/[Aa]ssets/_Recovery.meta
